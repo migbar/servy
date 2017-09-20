@@ -1,6 +1,7 @@
 defmodule Servy.Router do
   alias Servy.Conv
   alias Servy.BearController
+  alias Servy.PledgeController
 
   @pages_path Path.expand("../../pages", __DIR__)
 
@@ -30,6 +31,14 @@ defmodule Servy.Router do
 
   def route(%Conv{ method: "POST", path: "/bears"} = conv) do
     BearController.create(conv, conv.params)
+  end
+
+  def route(%Conv{ method: "POST", path: "/pledges"}= conv) do
+    PledgeController.create(conv, conv.params)
+  end
+
+  def route(%Conv{ method: "GET", path: "/pledges"}= conv) do
+    PledgeController.index(conv)
   end
 
   def route(%Conv{ path: path } = conv) do
